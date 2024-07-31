@@ -5,7 +5,9 @@ node_modules/
 dist/
 .vscode/
 
+.env
 cookies.json
 docs/twitter
 generate-schema.ts
 schema.hbs
+credentials
