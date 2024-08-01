@@ -12,7 +12,7 @@ export type Operation = {
 
 const Operations: Operation = {
   HomeTimeline: ['y_uKFuMFMkuAXTSipw2KNA', 'HomeTimeline'],
-  HomeLatestTimeline: ['nu_CdZ8jiBQve83-0ce56A', 'HomeLatestTimeline'],
+  HomeLatestTimeline: ['swa5tm06UZNTKxtXsCwz8A-0ce56A', 'HomeLatestTimeline'],
   CreateDraftTweet: ['cH9HZWz_EW9gnswvA4ZRiQ', 'CreateDraftTweet'],
   CreateTweet: ['FcQ8KP1fbPXkq2AugbyXGw', 'CreateTweet'],
   DeleteTweet: ['VaenaVgh5q5ih7kvyVjgtg', 'DeleteTweet'],
