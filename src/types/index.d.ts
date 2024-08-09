@@ -5,6 +5,7 @@ declare module 'process' {
 				readonly NODE_ENV?: string;
         readonly SPREAD_SHEET_ID?: string;
         readonly SHEET_NAME?: string;
+				readonly GROQ_API_KEY?: string;
 			}
 		}
 	}
