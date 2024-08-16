@@ -35,7 +35,7 @@
     "types": [
       "./src/types",
       "node"
-    ],                                      /* Specify type package names to be included without being referenced in a source file. */
+    ] /* Specify type package names to be included without being referenced in a source file. */,
     // "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */
     // "moduleSuffixes": [],                             /* List of file name suffixes to search when resolving a module. */
     // "resolveJsonModule": true,                        /* Enable importing .json files. */
@@ -99,5 +99,5 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "noErrorTruncation": true /* Disable truncating errors to 120 characters. */
   },
-  "include": ["src/**/*.ts","script.ts"],
+  "include": ["src/**/*.ts", "script.ts"]
 }

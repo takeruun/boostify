@@ -20,7 +20,11 @@ module.exports = [
   {
     files: ['src/**/*.ts'],
     languageOptions: {
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        // process 等使えるように認識させる
+        ...globals.node,
+      },
       parser,
     },
     plugins: {
