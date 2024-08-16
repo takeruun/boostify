@@ -4,6 +4,7 @@ import {
   Browser,
   Builder,
   By,
+  Key,
   ThenableWebDriver,
   until,
 } from 'selenium-webdriver';
@@ -108,7 +109,7 @@ export class MorphicApi {
 
       await this.seleniumDriver
         .findElement(By.xpath('/html/body/div[2]/div/div/form/div[1]/textarea'))
-        .sendKeys(content);
+        .sendKeys(content.replace(/\n/g, Key.chord(Key.SHIFT, Key.ENTER)));
 
       await this.seleniumDriver
         .findElement(By.xpath('/html/body/div[2]/div/div/form/div[1]/button'))
