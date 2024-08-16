@@ -4,5 +4,5 @@ export interface MorphicApiConstructor {
 }
 
 export interface MorphicApiInterface {
-  postImageEvaluation(content: string): Promise<boolean>
+  chat(content: string): Promise<string>
 }

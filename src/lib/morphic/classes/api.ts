@@ -1,6 +1,6 @@
 import 'dotenv/config'
 import * as fs from 'fs';
-import { Browser, Builder, By, ThenableWebDriver, until } from 'selenium-webdriver';
+import { Browser, Builder, By, ThenableWebDriver, until, error as SELENIUM_ERROR } from 'selenium-webdriver';
 import { LOGIN_URL, MORPHIC_URL } from '../constants';
 import {MorphicApiConstructor, MorphicApiInterface} from '../interfaces/classes/api';
 
@@ -74,15 +74,38 @@ export class MorphicApi {
     }
   }
 
-  async postImageEvaluation(content: string): Promise<boolean> {
+  async chat(content: string): Promise<string> {
+    if (!content) {
+      throw new Error('content is required');
+    }
+
+    let result = "";
+
     try{
       await this.setAuth();
 
-      await this.seleniumDriver.sleep(10000);
+      await this.seleniumDriver.findElement(By.xpath('/html/body/div[2]/div/div/form/div[1]/textarea')).sendKeys(content)
+
+      await this.seleniumDriver.findElement(By.xpath('/html/body/div[2]/div/div/form/div[1]/button')).click()
+
+      await this.seleniumDriver.wait(until.elementLocated(By.xpath("//*[text()='Answer']")), 60000);
+
+      await this.seleniumDriver.wait(until.elementLocated(By.xpath("//*[text()='Morphic can make mistakes. Verify response and sources.']")), 60000);
+      
+      const elem = await this.seleniumDriver.wait(
+        until.elementLocated(By.xpath("//*[text()='Answer']/following-sibling::*[1]")), 
+        60000
+      );
+
+      result = await elem.getText();
+    }catch(e){
+      console.log('postImageEvaluation Error:', e);
     } finally {
-      this.seleniumDriver.quit();
+      await this.seleniumDriver.sleep(5000);
+
+      await this.seleniumDriver.quit();
     }
 
-    return false
+    return result;
   }
 }
