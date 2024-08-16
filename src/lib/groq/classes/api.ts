@@ -1,10 +1,15 @@
-import Groq, { APIError } from "groq-sdk";
-import { SYSTEM_PROMPT } from "../constants";
-import { GroqApiConstructor, GroqApiInterface } from "../interfaces/classes/api";
+import Groq, { APIError } from 'groq-sdk';
+import { SYSTEM_PROMPT } from '../constants';
+import {
+  GroqApiConstructor,
+  GroqApiInterface,
+} from '../interfaces/classes/api';
 
-export const newGroqApi = ({API_KEY}:GroqApiConstructor): GroqApiInterface => {
+export const newGroqApi = ({
+  API_KEY,
+}: GroqApiConstructor): GroqApiInterface => {
   return new GroqApi(API_KEY);
-}
+};
 
 export class GroqApi {
   protected client: Groq;
@@ -25,11 +30,13 @@ export class GroqApi {
       const res = await this.client.chat.completions.create({
         messages: [
           {
-            role: 'system', content: SYSTEM_PROMPT
+            role: 'system',
+            content: SYSTEM_PROMPT,
           },
           {
-            role: 'user', content
-          }
+            role: 'user',
+            content,
+          },
         ],
         model: this.model,
       });
@@ -46,8 +53,7 @@ export class GroqApi {
           case 403:
             throw new Error('Invalid API key');
         }
-      }
-      else {
+      } else {
         throw error;
       }
     }
