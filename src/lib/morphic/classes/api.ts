@@ -15,24 +15,24 @@ import {
 } from '../interfaces/classes/api';
 
 export const newMorphicApi = ({
-  LOGIN_EMAIL,
-  PASSWORD,
+  loginEmail,
+  password,
 }: MorphicApiConstructor): MorphicApiInterface => {
-  return new MorphicApi(LOGIN_EMAIL, PASSWORD);
+  return new MorphicApi(loginEmail, password);
 };
 
 export class MorphicApi {
   private seleniumDriver: ThenableWebDriver;
-  private LOGIN_EMAIL: string;
-  private PASSWORD: string;
-  private COOKIES_FILE_PATH: string = 'credentials/morphic/cookies.json';
+  private loginEmail: string;
+  private password: string;
+  private cookiesFilePath: string = 'credentials/morphic/cookies.json';
 
-  constructor(LOGIN_EMAIL: string, PASSWORD: string) {
-    if (!LOGIN_EMAIL || !PASSWORD) {
-      throw new Error('LOGIN_EMAIL and PASSWORD are required');
+  constructor(loginEmail: string, password: string) {
+    if (!loginEmail || !password) {
+      throw new Error('loginEmail and password are required');
     }
-    this.LOGIN_EMAIL = LOGIN_EMAIL;
-    this.PASSWORD = PASSWORD;
+    this.loginEmail = loginEmail;
+    this.password = password;
 
     const seleniumServerUrl = process.env.SELENIUM_SERVER_URL;
 
@@ -45,11 +45,11 @@ export class MorphicApi {
   }
 
   private async setAuth() {
-    if (fs.existsSync(this.COOKIES_FILE_PATH)) {
+    if (fs.existsSync(this.cookiesFilePath)) {
       await this.seleniumDriver.get(MORPHIC_URL);
       // cookies.json から読み込み
       const cookies = JSON.parse(
-        fs.readFileSync(this.COOKIES_FILE_PATH, 'utf-8'),
+        fs.readFileSync(this.cookiesFilePath, 'utf-8'),
       );
       for (const cookie of cookies) {
         await this.seleniumDriver.manage().addCookie(cookie);
@@ -68,10 +68,10 @@ export class MorphicApi {
       await this.seleniumDriver.get(LOGIN_URL);
       await this.seleniumDriver
         .findElement(By.id('email'))
-        .sendKeys(this.LOGIN_EMAIL);
+        .sendKeys(this.loginEmail);
       await this.seleniumDriver
         .findElement(By.id('password'))
-        .sendKeys(this.PASSWORD);
+        .sendKeys(this.password);
       await this.seleniumDriver
         .findElement(By.xpath('/html/body/div[2]/div/div[3]/form/button'))
         .click();
@@ -81,7 +81,7 @@ export class MorphicApi {
       // cookies.json に保存
       const cookies = await this.seleniumDriver.manage().getCookies();
       fs.writeFileSync(
-        this.COOKIES_FILE_PATH,
+        this.cookiesFilePath,
         JSON.stringify(cookies, null, 2),
       );
     } catch (error) {
@@ -89,8 +89,8 @@ export class MorphicApi {
 
       this.seleniumDriver.quit();
 
-      if (fs.existsSync(this.COOKIES_FILE_PATH)) {
-        fs.unlinkSync(this.COOKIES_FILE_PATH);
+      if (fs.existsSync(this.cookiesFilePath)) {
+        fs.unlinkSync(this.cookiesFilePath);
       }
 
       throw error;

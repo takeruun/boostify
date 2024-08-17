@@ -6,22 +6,22 @@ import {
 } from '../interfaces/classes/api';
 
 export const newGroqApi = ({
-  API_KEY,
+  apiKey,
 }: GroqApiConstructor): GroqApiInterface => {
-  return new GroqApi(API_KEY);
+  return new GroqApi(apiKey);
 };
 
 export class GroqApi {
   protected client: Groq;
   private model: string = 'llama3-8b-8192';
 
-  constructor(API_KEY: string) {
-    if (!API_KEY) {
-      throw new Error('API_KEY is required');
+  constructor(apiKey: string) {
+    if (!apiKey) {
+      throw new Error('apiKey is required');
     }
 
     this.client = new Groq({
-      apiKey: API_KEY,
+      apiKey,
     });
   }
 

@@ -24,7 +24,7 @@ import {
   TweetApiInterface,
 } from '../interfaces/classes/tweet';
 
-export const NewTweetApi = ({
+export const newTweetApi = ({
   cookiePath,
   isBlue = false,
 }: TweetApiConstructor): TweetApiInterface => {

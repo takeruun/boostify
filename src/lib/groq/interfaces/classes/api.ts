@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 export interface GroqApiConstructor {
-  API_KEY: string;
+  apiKey: string;
 }
 
 export interface GroqApiInterface {

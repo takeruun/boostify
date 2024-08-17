@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 
 export interface MorphicApiConstructor {
-  LOGIN_EMAIL: string;
-  PASSWORD: string;
+  loginEmail: string;
+  password: string;
 }
 
 export interface MorphicApiInterface {
