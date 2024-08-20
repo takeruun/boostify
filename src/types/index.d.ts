@@ -7,6 +7,8 @@ declare module 'process' {
         readonly SHEET_NAME?: string;
         readonly GROQ_API_KEY?: string;
         readonly SELENIUM_SERVER_URL?: string;
+        readonly MORPHIC_LOGIN_EMAIL?: string;
+        readonly MORPHIC_LOGIN_PASSWORD?: string;
       }
     }
   }

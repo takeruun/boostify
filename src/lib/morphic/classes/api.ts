@@ -80,10 +80,7 @@ export class MorphicApi {
 
       // cookies.json に保存
       const cookies = await this.seleniumDriver.manage().getCookies();
-      fs.writeFileSync(
-        this.cookiesFilePath,
-        JSON.stringify(cookies, null, 2),
-      );
+      fs.writeFileSync(this.cookiesFilePath, JSON.stringify(cookies, null, 2));
     } catch (error) {
       console.log('login error:', error);
 

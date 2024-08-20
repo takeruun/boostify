@@ -74,14 +74,16 @@ type ItemContent_TimelineTimelineCursor = {
   __typename: 'TimelineTimelineCursor';
 };
 
+export type Entry_TimelineTimelineItem_ItemContent =
+  | ItemContent_TimelineTweet
+  | ItemContent_TimelineLabel
+  | ItemContent_TimelineTimelineCursor;
+
 // ツイート内容本体など
-type Entry_TimelineTimelineItem = {
+export type Entry_TimelineTimelineItem = {
   content: {
     entryType: 'TimelineTimelineItem';
-    itemContent:
-      | ItemContent_TimelineTweet
-      | ItemContent_TimelineLabel
-      | ItemContent_TimelineTimelineCursor;
+    itemContent: Entry_TimelineTimelineItem_ItemContent;
     __typename: 'TimelineTimelineItem';
   };
   entryId: string;
@@ -96,7 +98,7 @@ type Entry_TimelineTimelineCursor = {
   };
 };
 // ツイートのリプライなど
-type Entry_TimelineTimelineModule = {
+export type Entry_TimelineTimelineModule = {
   displayType: 'VerticalConversation';
   entryType: 'TimelineTimelineModule';
   items: Array<Item_TimelineTweet>;
@@ -105,7 +107,7 @@ type Entry_TimelineTimelineModule = {
   sortIndex: string;
 };
 
-type Instruction_TimelineAddEntries = {
+export type Instruction_TimelineAddEntries = {
   type: 'TimelineAddEntries';
   entries: Array<Entry_TimelineTimelineItem | Entry_TimelineTimelineModule>;
 };
@@ -256,7 +258,7 @@ export type TweetDetailVariables = {
   withBirdwatchNotes: boolean;
   withVoice: boolean;
 };
-type Instruction_TweetDetail =
+export type Instruction_TweetDetail =
   | Instruction_TimelineAddEntries
   | Instruction_TimelineTerminateTimeline;
 export type TweetDetailResponse = {
