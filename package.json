@@ -12,6 +12,7 @@
     "run:example": "ts-node -r tsconfig-paths/register script.ts"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.17.1",
     "axios": "^1.7.2",
     "dotenv": "^16.4.5",
     "googleapis": "^140.0.1",

@@ -24,6 +24,7 @@ type tweet_results = {
       retweet_count: number;
       retweeted: boolean;
       user_id_str: string;
+      entities: Legacy_Entity;
     };
     views: {
       count?: number;
@@ -32,6 +33,15 @@ type tweet_results = {
     __typename: 'Tweet';
   };
   __typename: 'TimelineTweet';
+};
+type Legacy_Entity = {
+  media: Array<Legacy_Entity_Media>;
+};
+type Legacy_Entity_Media = {
+  allow_download_status: {
+    allow_download: boolean;
+  };
+  media_url_https: string;
 };
 
 type Item_TimelineTweet = {
