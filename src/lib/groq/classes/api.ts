@@ -11,7 +11,6 @@ export const newGroqApi = ({
   return new GroqApi(apiKey);
 };
 
-
 export class GroqApi {
   protected client: Groq;
   private model: string = 'llama3-8b-8192';
