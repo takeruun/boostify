@@ -40,6 +40,7 @@ export class TweetApi extends Api {
       withCommunity: true,
       latestControlAvailable: true,
       includePromotedContent: true,
+      seenTweetIds: [], // 既読ツイートID
     };
     if (cursor) {
       variables['cursor'] = cursor;
@@ -56,7 +57,6 @@ export class TweetApi extends Api {
       communities_web_enable_tweet_community_results_fetch: true,
       c9s_tweet_anatomy_moderator_badge_enabled: true,
       articles_preview_enabled: true,
-      tweetypie_unmention_optimization_enabled: true,
       responsive_web_edit_tweet_api_enabled: true,
       graphql_is_translatable_rweb_tweet_is_translatable_enabled: true,
       view_counts_everywhere_api_enabled: true,
@@ -75,7 +75,7 @@ export class TweetApi extends Api {
     };
 
     const res = await this.graphqlRun(
-      cursor ? 'GET' : 'POST',
+      cursor ? 'POST' : 'GET',
       Operations.HomeTimeline,
       variables,
       features,

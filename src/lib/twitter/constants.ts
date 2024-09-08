@@ -11,15 +11,15 @@ export type Operation = {
 };
 
 const Operations: Operation = {
-  HomeTimeline: ['y_uKFuMFMkuAXTSipw2KNA', 'HomeTimeline'],
-  HomeLatestTimeline: ['swa5tm06UZNTKxtXsCwz8A-0ce56A', 'HomeLatestTimeline'],
+  HomeTimeline: ['HJFjzBgCs16TqxewQOeLNg', 'HomeTimeline'],
+  HomeLatestTimeline: ['DiTkXJgLqBBxCs7zaYsbtA', 'HomeLatestTimeline'],
   CreateDraftTweet: ['cH9HZWz_EW9gnswvA4ZRiQ', 'CreateDraftTweet'],
-  CreateTweet: ['FcQ8KP1fbPXkq2AugbyXGw', 'CreateTweet'],
+  CreateTweet: ['xT36w0XM3A8jDynpkram2A', 'CreateTweet'],
   DeleteTweet: ['VaenaVgh5q5ih7kvyVjgtg', 'DeleteTweet'],
   FavoriteTweet: ['lI07N6Otwv1PhnEgXILM7A', 'FavoriteTweet'],
   UnfavoriteTweet: ['ZYKSe-w7KEslx3JhSIk5LA', 'UnfavoriteTweet'],
-  SearchTimeline: ['bbQx1-LgtAQiGBicdX1ECw', 'SearchTimeline'],
-  TweetDetail: ['OxXXs7fqOlx3mGlIjbzfaw', 'TweetDetail'],
+  SearchTimeline: ['UN1i3zUiCWa-6r-Uaho4fw', 'SearchTimeline'],
+  TweetDetail: ['QuBlQ6SxNAQCt6-kBiCXCQ', 'TweetDetail'],
 };
 
 export { Operations };
