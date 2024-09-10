@@ -7,9 +7,10 @@ import {
   HomeLatestTimelineResponse,
   HomeTimelineResponse,
   SearchTimelineResponse,
+  SearchTimelineVariables,
   TweetDetailResponse,
   UnfavoriteTweetResponse,
-} from '../../types/tweet';
+} from '../types/tweet';
 
 export interface TweetApiConstructor {
   cookiePath: string;
@@ -28,6 +29,7 @@ export interface TweetApiInterface {
   unfavoriteTweet(tweetId: string): Promise<UnfavoriteTweetResponse>;
   searchTimeline(
     query: string,
+    product: SearchTimelineVariables['product'],
     cursor?: string,
   ): Promise<SearchTimelineResponse>;
   tweetDetail(userName: string, tweetId: string): Promise<TweetDetailResponse>;

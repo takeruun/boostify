@@ -34,8 +34,12 @@ type tweet_results = {
   };
   __typename: 'TimelineTweet';
 };
+type promotedMetadata = {
+  impressionId: string;
+  impressionString: string;
+};
 type Legacy_Entity = {
-  media: Array<Legacy_Entity_Media>;
+  media?: Array<Legacy_Entity_Media>;
 };
 type Legacy_Entity_Media = {
   allow_download_status: {
@@ -49,20 +53,18 @@ type Item_TimelineTweet = {
   item: {
     itemContent: {
       itemType: 'TimelineTweet';
-      tweetDisplayType: 'Tweet';
+      tweetDisplayType: 'Tweet' | 'SelfThread';
       tweet_results: tweet_results;
       __typename: 'TimelineTweet';
     };
   };
 };
 
-type ItemContent_TimelineTweet = {
+export type ItemContent_TimelineTweet = {
   itemType: 'TimelineTweet';
   tweetDisplayType: 'Tweet';
   tweet_results: tweet_results;
-  promotedMetadata?: {
-    impressionId: string;
-  };
+  promotedMetadata?: promotedMetadata;
 };
 // 「スパムの可能性がある返信を表示」というリプライに表示されるラベル
 type ItemContent_TimelineLabel = {
@@ -92,6 +94,11 @@ export type Entry_TimelineTimelineItem_ItemContent =
 // ツイート内容本体など
 export type Entry_TimelineTimelineItem = {
   content: {
+    clientEventInfo: {
+      details: {
+        timelinesDetails: string;
+      };
+    };
     entryType: 'TimelineTimelineItem';
     itemContent: Entry_TimelineTimelineItem_ItemContent;
     __typename: 'TimelineTimelineItem';
@@ -99,27 +106,44 @@ export type Entry_TimelineTimelineItem = {
   entryId: string;
   sortIndex: string;
 };
-type Entry_TimelineTimelineCursor = {
+export type Entry_TimelineTimelineCursor = {
   content: {
     cursorType: 'Top' | 'Bottom';
     entryType: 'TimelineTimelineCursor';
     value: string;
     __typename: 'TimelineTimelineCursor';
   };
+  entryId: string;
+  sortIndex: string;
 };
 // ツイートのリプライなど
 export type Entry_TimelineTimelineModule = {
-  displayType: 'VerticalConversation';
-  entryType: 'TimelineTimelineModule';
-  items: Array<Item_TimelineTweet>;
-  __typename: 'TimelineTimelineModule';
+  content: {
+    displayType: 'VerticalConversation';
+    entryType: 'TimelineTimelineModule';
+    items: Array<Item_TimelineTweet>;
+    __typename: 'TimelineTimelineModule';
+  };
   entryId: string;
   sortIndex: string;
 };
 
 export type Instruction_TimelineAddEntries = {
   type: 'TimelineAddEntries';
-  entries: Array<Entry_TimelineTimelineItem | Entry_TimelineTimelineModule>;
+  entries: Array<
+    | Entry_TimelineTimelineItem
+    | Entry_TimelineTimelineModule
+    | Entry_TimelineTimelineCursor
+  >;
+};
+export type Instruction_TimelineReplaceEntry = {
+  type: 'TimelineReplaceEntry';
+  entry_id_to_replace: string;
+  entry: {
+    content: Entry_TimelineTimelineCursor;
+    entryId: string;
+    sortIndex: string;
+  };
 };
 type Instruction_TimelineTerminateTimeline = {
   direction: 'Top';
@@ -242,7 +266,7 @@ export type SearchTimelineVariables = {
 };
 type Instruction_SearchTimeline =
   | Instruction_TimelineAddEntries
-  | Entry_TimelineTimelineCursor;
+  | Instruction_TimelineReplaceEntry;
 export type SearchTimelineResponse = {
   data: {
     search_by_raw_query: {

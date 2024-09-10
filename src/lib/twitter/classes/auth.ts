@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { AuthInterface } from '../interfaces/classes/auth';
+import { AuthInterface } from '../interfaces/auth';
 
 /**
  * Auth class

@@ -1,9 +1,6 @@
 import Groq, { APIError } from 'groq-sdk';
 import { SYSTEM_PROMPT } from '../constants';
-import {
-  GroqApiConstructor,
-  GroqApiInterface,
-} from '../interfaces/classes/api';
+import { GroqApiConstructor, GroqApiInterface } from '../interfaces';
 
 export const newGroqApi = ({
   apiKey,

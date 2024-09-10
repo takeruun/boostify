@@ -1,14 +1,6 @@
 import { GoogleGenerativeAI, Part } from '@google/generative-ai';
 import * as fs from 'fs';
-
-export interface GoogleAiInterface {
-  generateContent(
-    // eslint-disable-next-line no-unused-vars
-    prompt: string,
-    // eslint-disable-next-line no-unused-vars
-    imagePaths?: Array<string>,
-  ): Promise<string>;
-}
+import { GoogleAiInterface } from '../interfaces';
 
 export const newGoogleAi = (apiKey: string): GoogleAiInterface => {
   return new GoogleAi(apiKey);

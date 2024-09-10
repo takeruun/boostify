@@ -19,10 +19,7 @@ import {
 import { Features, FieldToggles } from '../types/api';
 import { Api } from './api';
 import { Operations } from '../constants';
-import {
-  TweetApiConstructor,
-  TweetApiInterface,
-} from '../interfaces/classes/tweet';
+import { TweetApiConstructor, TweetApiInterface } from '../interfaces';
 
 export const newTweetApi = ({
   cookiePath,
@@ -264,13 +261,14 @@ export class TweetApi extends Api {
 
   async searchTimeline(
     query: string,
+    product: SearchTimelineVariables['product'],
     cursor?: string,
   ): Promise<SearchTimelineResponse> {
     const variables: SearchTimelineVariables = {
       rawQuery: query,
       count: 20,
       querySource: 'typed_query',
-      product: 'Top',
+      product,
       cursor: cursor,
     };
     const features: Features = {
