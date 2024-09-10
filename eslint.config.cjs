@@ -30,7 +30,15 @@ module.exports = [
     plugins: {
       '@typescript-eslint': eslintPlugin,
     },
-    rules: {},
+    rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
+    },
   },
   {
     files: ['src/schema/*.ts'],
