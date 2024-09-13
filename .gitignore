@@ -10,3 +10,5 @@ docs/twitter
 generate-schema.ts
 schema.hbs
 credentials
+image1.png
+log/
