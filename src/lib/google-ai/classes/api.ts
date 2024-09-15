@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI, Part } from '@google/generative-ai';
 import * as fs from 'fs';
+
 import { GoogleAiInterface } from '../interfaces';
 
 export const newGoogleAi = (apiKey: string): GoogleAiInterface => {

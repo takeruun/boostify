@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import { AxiosResponse } from 'axios';
+
 import {
   DraftTweetResponse,
   FavoriteTweetResponse,

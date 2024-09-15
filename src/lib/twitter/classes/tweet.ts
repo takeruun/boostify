@@ -1,4 +1,8 @@
 import { AxiosResponse } from 'axios';
+
+import { Operations } from '../constants';
+import { TweetApiConstructor, TweetApiInterface } from '../interfaces';
+import { Features, FieldToggles } from '../types/api';
 import {
   CreateTweetVariables,
   DraftTweetResponse,
@@ -16,10 +20,7 @@ import {
   UnfavoriteTweetResponse,
   UnfavoriteTweetVariables,
 } from '../types/tweet';
-import { Features, FieldToggles } from '../types/api';
 import { Api } from './api';
-import { Operations } from '../constants';
-import { TweetApiConstructor, TweetApiInterface } from '../interfaces';
 
 export const newTweetApi = ({
   cookiePath,

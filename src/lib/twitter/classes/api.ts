@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
-import { Auth } from './auth';
+
 import { Features, FieldToggles, Variables } from '../types/api';
+import { Auth } from './auth';
 
 export class Api extends Auth {
   private static GQL_URL = 'https://twitter.com/i/api/graphql';

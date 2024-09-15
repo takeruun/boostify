@@ -1,4 +1,5 @@
 import Groq, { APIError } from 'groq-sdk';
+
 import { SYSTEM_PROMPT } from '../constants';
 import { GroqApiConstructor, GroqApiInterface } from '../interfaces';
 

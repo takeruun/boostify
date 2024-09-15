@@ -1,9 +1,9 @@
 import {
+  Entry_TimelineTimelineCursor,
   Entry_TimelineTimelineItem,
   Entry_TimelineTimelineItem_ItemContent,
   Entry_TimelineTimelineModule,
   Instruction_TweetDetail,
-  Entry_TimelineTimelineCursor,
   ItemContent_TimelineTweet,
 } from './tweet';
 

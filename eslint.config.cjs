@@ -3,6 +3,7 @@ const eslintPlugin = require('@typescript-eslint/eslint-plugin');
 const tseslint = require('typescript-eslint');
 const eslint = require('@eslint/js');
 const parser = require('@typescript-eslint/parser');
+const simpleImportSort = require('eslint-plugin-simple-import-sort');
 
 module.exports = [
   ...tseslint.configs.recommended,
@@ -53,6 +54,15 @@ module.exports = [
         },
       ],
       'no-useless-escape': 'off',
+    },
+  },
+  {
+    plugins: {
+      'simple-import-sort': simpleImportSort,
+    },
+    rules: {
+      'simple-import-sort/imports': 'error',
+      'simple-import-sort/exports': 'error',
     },
   },
 ];

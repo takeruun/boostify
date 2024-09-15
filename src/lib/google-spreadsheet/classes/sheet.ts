@@ -1,4 +1,5 @@
-import { google, Common, sheets_v4 } from 'googleapis';
+import { Common, google, sheets_v4 } from 'googleapis';
+
 import { SheetApiInterface } from '../interface';
 
 export const newSheetApi = (): SheetApiInterface => {
