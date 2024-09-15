@@ -99,5 +99,5 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "noErrorTruncation": true /* Disable truncating errors to 120 characters. */
   },
-  "include": ["src/**/*.ts", "script.ts"]
+  "include": ["src/**/*.ts", "*script.ts"]
 }

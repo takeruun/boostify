@@ -4,11 +4,12 @@ yarn-error.log
 node_modules/
 dist/
 .vscode/
+credentials/
+log/
 
 .env
 docs/twitter
 generate-schema.ts
 schema.hbs
-credentials
 image1.png
-log/
+*script.ts

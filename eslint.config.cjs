@@ -11,7 +11,7 @@ module.exports = [
     ignores: [
       'dist/**/*',
       'schema.hbs',
-      'script.ts',
+      '*script.ts',
       'eslint.config.cjs',
       'generate-schema.ts',
       '.prettierrc.cjs',

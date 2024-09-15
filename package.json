@@ -9,7 +9,8 @@
     "format": "prettier . --write",
     "fix": "yarn lint --fix && yarn format --loglevel error",
     "build": "rm -rf dist && tsc -p tsconfig.build.json",
-    "run:example": "ts-node -r tsconfig-paths/register script.ts"
+    "run:example": "ts-node -r tsconfig-paths/register script.ts",
+    "run:script": "ts-node -r tsconfig-paths/register "
   },
   "dependencies": {
     "@google/generative-ai": "^0.17.1",
