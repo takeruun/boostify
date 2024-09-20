@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createLogger, format, Logger, transports } from 'winston';
 
+const date = new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Tokyo' });
+
 export class BoostfiyLogger {
   private logger: Logger = createLogger({
     level: 'info',
@@ -14,8 +16,11 @@ export class BoostfiyLogger {
     ),
     defaultMeta: { service: 'boostfiy' },
     transports: [
-      new transports.File({ filename: 'log/error.log', level: 'error' }),
-      new transports.File({ filename: 'log/development.log' }),
+      new transports.File({
+        filename: `log/${date}/error.log`,
+        level: 'error',
+      }),
+      new transports.File({ filename: `log/${date}/development.log` }),
     ],
   });
 

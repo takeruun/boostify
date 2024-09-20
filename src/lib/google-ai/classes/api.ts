@@ -1,7 +1,12 @@
-import { GoogleGenerativeAI, Part } from '@google/generative-ai';
+import {
+  GoogleGenerativeAI,
+  GoogleGenerativeAIFetchError,
+  Part,
+} from '@google/generative-ai';
 import * as fs from 'fs';
 
 import { GoogleAiInterface } from '../interfaces';
+import { GoogleAiError } from './error';
 
 export const newGoogleAi = (apiKey: string): GoogleAiInterface => {
   return new GoogleAi(apiKey);
@@ -21,7 +26,9 @@ class GoogleAi implements GoogleAiInterface {
 
   async generateContent(
     prompt: string,
+    systemInstruction?: string,
     imagePaths?: Array<string>,
+    model?: string,
   ): Promise<string> {
     try {
       const imageParts: Array<Part> = imagePaths
@@ -29,20 +36,26 @@ class GoogleAi implements GoogleAiInterface {
         : [];
 
       const result = await this.client
-        .getGenerativeModel({ model: this.model })
+        .getGenerativeModel({ model: model || this.model, systemInstruction })
         .generateContent([prompt, ...imageParts]);
       const response = result.response.text();
       if (!response) {
-        throw new Error('Failed to generate content');
+        throw new GoogleAiError('Failed to generate content');
       }
 
       return response;
     } catch (error) {
-      if (error instanceof Error) {
+      if (error instanceof GoogleGenerativeAIFetchError) {
         console.log(error);
-        throw error;
+        let errorMessages = error.statusText || '';
+        if (error.errorDetails) {
+          errorMessages += error.errorDetails
+            .map((detail) => `domain:${detail.domain}, reason:${detail.reason}`)
+            .join('\n');
+        }
+        throw new GoogleAiError(errorMessages, error.status);
       } else {
-        throw new Error('Failed to generate content');
+        throw new GoogleAiError('Failed to generate content');
       }
     }
   }

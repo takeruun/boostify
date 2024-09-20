@@ -1,7 +1,7 @@
-type tweet_results = {
+export type Tweet_results = {
   result: {
     rest_id: string;
-    core: {
+    core?: {
       user_results: {
         result: {
           legacy: {
@@ -30,13 +30,21 @@ type tweet_results = {
       count?: number;
       state: 'Enabled' | 'EnabledWithCount';
     };
+    tombstone?: Tombstone;
     __typename: 'Tweet';
   };
   __typename: 'TimelineTweet';
 };
-type promotedMetadata = {
+type PromotedMetadata = {
   impressionId: string;
   impressionString: string;
+};
+type Tombstone = {
+  text: {
+    rtl: boolean;
+    text: string;
+  };
+  __typename: 'TextTombstone';
 };
 type Legacy_Entity = {
   media?: Array<Legacy_Entity_Media>;
@@ -54,7 +62,7 @@ type Item_TimelineTweet = {
     itemContent: {
       itemType: 'TimelineTweet';
       tweetDisplayType: 'Tweet' | 'SelfThread';
-      tweet_results: tweet_results;
+      tweet_results: Tweet_results;
       __typename: 'TimelineTweet';
     };
   };
@@ -63,8 +71,8 @@ type Item_TimelineTweet = {
 export type ItemContent_TimelineTweet = {
   itemType: 'TimelineTweet';
   tweetDisplayType: 'Tweet';
-  tweet_results: tweet_results;
-  promotedMetadata?: promotedMetadata;
+  tweet_results: Tweet_results;
+  promotedMetadata?: PromotedMetadata;
 };
 // 「スパムの可能性がある返信を表示」というリプライに表示されるラベル
 type ItemContent_TimelineLabel = {

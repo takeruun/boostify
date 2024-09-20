@@ -5,6 +5,7 @@ import {
   Entry_TimelineTimelineModule,
   Instruction_TweetDetail,
   ItemContent_TimelineTweet,
+  Tweet_results,
 } from './tweet';
 
 export const isInstruction_TimelineAddEntries = (
@@ -43,4 +44,8 @@ export const isItemContent_TimelineTweet = (
 
 export const isPromoteTimeLineTweet = (tweet: ItemContent_TimelineTweet) => {
   return 'promotedMetadata' in tweet;
+};
+
+export const isTombstoneAccount = (tweet: Tweet_results) => {
+  return tweet.result.tombstone?.__typename === 'TextTombstone';
 };
