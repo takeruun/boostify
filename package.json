@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "lint": "eslint .",
-    "format": "prettier . --write",
+    "format": "prettier . --write --ignore-path .prettierignore",
     "fix": "yarn lint --fix && yarn format --loglevel error",
     "build": "rm -rf dist && tsc -p tsconfig.build.json",
     "run:example": "ts-node -r tsconfig-paths/register script.ts",

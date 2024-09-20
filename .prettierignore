@@ -1,2 +1,7 @@
 .vscode/*
+
+dist/*
+credentials/*
+docs/*
+
 schema.hbs
