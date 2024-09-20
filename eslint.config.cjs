@@ -12,14 +12,13 @@ module.exports = [
     ignores: [
       'dist/**/*',
       'schema.hbs',
-      '*script.ts',
       'eslint.config.cjs',
       'generate-schema.ts',
       '.prettierrc.cjs',
     ],
   },
   {
-    files: ['src/**/*.ts'],
+    files: ['src/**/*.ts', '*script.ts'],
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -30,6 +29,7 @@ module.exports = [
     },
     plugins: {
       '@typescript-eslint': eslintPlugin,
+      'simple-import-sort': simpleImportSort,
     },
     rules: {
       '@typescript-eslint/no-unused-vars': [
@@ -39,6 +39,8 @@ module.exports = [
           ignoreRestSiblings: true,
         },
       ],
+      'simple-import-sort/imports': 'error',
+      'simple-import-sort/exports': 'error',
     },
   },
   {
@@ -54,15 +56,6 @@ module.exports = [
         },
       ],
       'no-useless-escape': 'off',
-    },
-  },
-  {
-    plugins: {
-      'simple-import-sort': simpleImportSort,
-    },
-    rules: {
-      'simple-import-sort/imports': 'error',
-      'simple-import-sort/exports': 'error',
     },
   },
 ];
