@@ -1,16 +1,21 @@
 yarn-error.log
 .DS_Store
+.vscode/
 
 node_modules/
 dist/
-.vscode/
-credentials/
 log/
 
 .env
+credentials/
+
 docs/twitter
 generate-schema.ts
 schema.hbs
-image1.png
-*script.ts
 script.sh
+
+# スクリプトファイルたち
+scripts/*
+!scripts/script.ts
+
+image1.png
