@@ -1,0 +1,17 @@
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /log/**/*.log
+
+    # Optional: JSONをパースしてElasticsearchに送る場合
+    # json.message_key: message     # 'message' フィールドにJSONデータが入っていると仮定
+    # json.keys_under_root: false   # JSONデータをトップレベルに展開しない
+    # json.add_error_key: true      # JSONパースエラーがあればエラーフィールドを追加
+
+output.elasticsearch:
+  hosts: ["http://elasticsearch:9200"]
+  pipeline: "main_pipeline"
+
+setup.kibana:
+  host: "http://kibana:5601"
