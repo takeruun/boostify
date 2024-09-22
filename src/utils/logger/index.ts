@@ -14,7 +14,7 @@ export class BoostfiyLogger {
       format.splat(),
       format.json(),
     ),
-    defaultMeta: { service: 'boostfiy' },
+    defaultMeta: { service: 'boostfiy', scriptName: '' },
     transports: [
       new transports.File({
         filename: `log/${date}/error.log`,
@@ -24,7 +24,7 @@ export class BoostfiyLogger {
     ],
   });
 
-  constructor() {
+  constructor(scriptName: string) {
     if (process.env.NODE_ENV !== 'production') {
       this.logger.add(
         new transports.Console({
@@ -32,6 +32,7 @@ export class BoostfiyLogger {
         }),
       );
     }
+    this.logger.defaultMeta['scriptName'] = scriptName;
   }
 
   public info(message: string, meta?: any) {
