@@ -6,7 +6,10 @@ export interface SheetApiConstructor {}
 
 export interface SheetApiInterface {
   getValues(
-    spreadsheetId: string,
     range: string,
   ): Promise<Common.GaxiosResponse<sheets_v4.Schema$ValueRange>>;
+  addValues(
+    range: string,
+    values: string[][],
+  ): Promise<Common.GaxiosResponse<sheets_v4.Schema$AppendValuesResponse>>;
 }
