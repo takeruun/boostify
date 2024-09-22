@@ -30,8 +30,8 @@ services:
     depends_on:
       - elasticsearch
     volumes:
-      - ./docker/init-pipeline.sh:/usr/local/bin/init-pipeline.sh  # .shファイルをコンテナ内にコピー
-    entrypoint: ["sh", "/usr/local/bin/init-pipeline.sh"]  # .shファイルを実行
+      - ./docker/init-pipeline.sh:/usr/local/bin/init-pipeline.sh # .shファイルをコンテナ内にコピー
+    entrypoint: ['sh', '/usr/local/bin/init-pipeline.sh'] # .shファイルを実行
 
   filebeat:
     platform: ${DOCKER_PLATFORM:-linux/amd64}

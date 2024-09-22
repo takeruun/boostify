@@ -10,8 +10,8 @@ filebeat.inputs:
     # json.add_error_key: true      # JSONパースエラーがあればエラーフィールドを追加
 
 output.elasticsearch:
-  hosts: ["http://elasticsearch:9200"]
-  pipeline: "main_pipeline"
+  hosts: ['http://elasticsearch:9200']
+  pipeline: 'main_pipeline'
 
 setup.kibana:
-  host: "http://kibana:5601"
+  host: 'http://kibana:5601'
