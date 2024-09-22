@@ -17,6 +17,10 @@ export class SheetApi {
   protected sheetId: string;
 
   constructor({ ClientEmail, PrivateKey, SheetId }: SheetApiConstructor) {
+    if (!ClientEmail || !PrivateKey || !SheetId) {
+      throw new Error('ClientEmail, PrivateKey, and SheetId are required');
+    }
+
     const auth = new google.auth.GoogleAuth({
       credentials: {
         client_email: ClientEmail,
