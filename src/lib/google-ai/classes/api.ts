@@ -49,6 +49,7 @@ class GoogleAi implements GoogleAiInterface {
         console.log(error);
         let errorMessages = error.statusText || '';
         if (error.errorDetails) {
+          if (errorMessages) errorMessages += '\nError Details:\n';
           errorMessages += error.errorDetails
             .map((detail) => `domain:${detail.domain}, reason:${detail.reason}`)
             .join('\n');
