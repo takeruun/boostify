@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 
 import { Features, FieldToggles, Variables } from '../types/api';
 import { Auth } from './auth';
+import { TwitterError } from './error';
 
 export class Api extends Auth {
   private static GQL_URL = 'https://twitter.com/i/api/graphql';
@@ -85,21 +86,20 @@ export class Api extends Auth {
 
     try {
       const res = await execApi;
-
       if (!res) {
-        throw new Error('Failed to fetch graphql api');
+        throw new TwitterError('No response');
       }
 
       return res;
     } catch (error) {
-      if (
-        error instanceof AxiosError &&
-        error.response &&
-        error.response.status !== 200
-      ) {
-        console.log('エラー発生: ', error.response.data);
-        throw new Error(`Failed to fetch graphql api`);
-      }
+      if (error instanceof AxiosError)
+        throw new TwitterError(
+          `Failed to fetch graphql api`,
+          error?.response?.status,
+          error,
+        );
+      if (error instanceof Error)
+        throw new TwitterError('Failed to fetch graphql api', undefined, error);
     }
 
     return null;

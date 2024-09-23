@@ -2,6 +2,7 @@ import Groq, { APIError } from 'groq-sdk';
 
 import { SYSTEM_PROMPT } from '../constants';
 import { GroqApiConstructor, GroqApiInterface } from '../interfaces';
+import { GroqError } from './error';
 
 export const newGroqApi = ({
   apiKey,
@@ -40,22 +41,15 @@ export class GroqApi {
       });
       const resContent = res.choices[0].message.content;
       if (!resContent) {
-        throw new Error('Failed to evaluate post content');
+        throw new GroqError('No response');
       }
 
       return resContent.includes('YES');
     } catch (error) {
       if (error instanceof APIError) {
-        console.log(error);
-        switch (error.status) {
-          case 403:
-            throw new Error('Invalid API key');
-        }
-      } else {
-        throw error;
+        throw new GroqError(error.message, error.status);
       }
+      throw new GroqError('Failed to post evaluation');
     }
-
-    return false;
   }
 }

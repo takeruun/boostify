@@ -40,13 +40,12 @@ class GoogleAi implements GoogleAiInterface {
         .generateContent([prompt, ...imageParts]);
       const response = result.response.text();
       if (!response) {
-        throw new GoogleAiError('Failed to generate content');
+        throw new GoogleAiError('No response');
       }
 
       return response;
     } catch (error) {
       if (error instanceof GoogleGenerativeAIFetchError) {
-        console.log(error);
         let errorMessages = error.statusText || '';
         if (error.errorDetails) {
           if (errorMessages) errorMessages += '\nError Details:\n';
