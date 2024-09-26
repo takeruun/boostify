@@ -7,14 +7,23 @@ export function createJsonFileFromJson(
   jsonFilePath: string,
   savablePath: string,
 ) {
-  const cookieData = fs.readFileSync(jsonFilePath, 'utf8');
-  // json parse
-  const json: Array<Record<string, string>> = JSON.parse(cookieData);
+  if (!fs.existsSync(jsonFilePath)) {
+    console.error('File not found');
+    return;
+  };
 
-  const newJson: Record<string, string> = {};
-  for (const [, value] of Object.entries(json)) {
-    newJson[value.name] = value.value;
+  try {
+    const cookieData = fs.readFileSync(jsonFilePath, 'utf8');
+    // json parse
+    const json: Array<Record<string, string>> = JSON.parse(cookieData);
+  
+    const newJson: Record<string, string> = {};
+    for (const [, value] of Object.entries(json)) {
+      newJson[value.name] = value.value;
+    }
+  
+    fs.writeFileSync(savablePath, JSON.stringify(newJson, null, 2));
+  }catch(e){
+    console.error(e);
   }
-
-  fs.writeFileSync(savablePath, JSON.stringify(newJson, null, 2));
 }
