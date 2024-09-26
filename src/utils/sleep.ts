@@ -1,3 +1,6 @@
-export async function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+/**
+ * 指定した秒数だけスリープする
+ */
+export async function sleep(s: number) {
+  return new Promise((resolve) => setTimeout(resolve, s * 1000));
 }
