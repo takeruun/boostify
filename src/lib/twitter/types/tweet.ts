@@ -14,7 +14,7 @@ export type Tweet_results = {
         };
       };
     };
-    legacy: {
+    legacy?: {
       bookmark_count: number;
       favorite_count: number;
       favorited: boolean;
