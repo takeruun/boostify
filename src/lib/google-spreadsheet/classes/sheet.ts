@@ -54,4 +54,46 @@ export class SheetApi {
       },
     });
   }
+
+  async rewriteValues(
+    range: string,
+    values: string[][],
+  ): Promise<Common.GaxiosResponse<sheets_v4.Schema$UpdateValuesResponse>> {
+    return await this.sheetsClient.spreadsheets.values.update({
+      spreadsheetId: this.sheetId,
+      range,
+      valueInputOption: 'USER_ENTERED',
+      requestBody: {
+        values,
+      },
+    });
+  }
+
+  async getSheets(): Promise<Array<sheets_v4.Schema$Sheet>> {
+    const res = await this.sheetsClient.spreadsheets.get({
+      spreadsheetId: this.sheetId,
+    });
+
+    return res.data.sheets || [];
+  }
+
+  async createSheets(titles: Array<string>): Promise<void> {
+    const requests: Array<sheets_v4.Schema$Request> = [];
+    titles.forEach((title) => {
+      requests.push({
+        addSheet: {
+          properties: {
+            title,
+          },
+        },
+      });
+    });
+
+    await this.sheetsClient.spreadsheets.batchUpdate({
+      spreadsheetId: this.sheetId,
+      requestBody: {
+        requests,
+      },
+    });
+  }
 }
