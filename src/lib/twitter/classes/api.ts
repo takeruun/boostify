@@ -23,6 +23,7 @@ export class Api extends Auth {
     });
 
     this.httpClient.interceptors.response.use((response) => {
+      console.log(response);
       const setCookieHeaders = response.headers['set-cookie'];
       if (setCookieHeaders) {
         const cookies = setCookieHeaders.map((cookie: string) => {
