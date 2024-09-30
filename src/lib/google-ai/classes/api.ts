@@ -1,6 +1,7 @@
 import {
   GoogleGenerativeAI,
   GoogleGenerativeAIFetchError,
+  GoogleGenerativeAIResponseError,
   Part,
 } from '@google/generative-ai';
 import * as fs from 'fs';
@@ -54,6 +55,8 @@ class GoogleAi implements GoogleAiInterface {
             .join('\n');
         }
         throw new GoogleAiError(errorMessages, error.status);
+      } else if (error instanceof GoogleGenerativeAIResponseError) {
+        throw new GoogleAiError(`Failed to generate content\n${error.message}`);
       } else {
         throw new GoogleAiError('Failed to generate content');
       }
